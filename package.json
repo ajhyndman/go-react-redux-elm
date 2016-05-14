@@ -12,6 +12,10 @@
     }
   },
   "devDependencies": {
+    "eslint": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^1.2.0",
+    "eslint-plugin-no-class": "^0.1.0",
+    "eslint-plugin-react": "^5.1.1",
     "jspm": "^0.16.34"
   }
 }

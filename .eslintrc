@@ -1,0 +1,189 @@
+{
+    "env": {
+        "browser": true
+    },
+
+    "plugins": [
+        "jsx-a11y",
+        "no-class",
+        "react"
+    ],
+
+    "extends": [
+        "eslint:recommended"
+    ],
+
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "impliedStrict": true,
+            "modules": true,
+            "jsx": true
+        }
+    },
+
+    "rules": {
+        "no-alert": 2,
+        "no-array-constructor": 2,
+        "no-caller": 2,
+        "no-class/no-class": 2,
+        "no-catch-shadow": 2,
+        "no-eval": 2,
+        "no-extend-native": 2,
+        "no-extra-bind": 2,
+        "no-implied-eval": 2,
+        "no-invalid-this": 2,
+        "no-iterator": 2,
+        "no-label-var": 2,
+        "no-labels": 2,
+        "no-lone-blocks": 2,
+        "no-loop-func": 2,
+        "no-multi-spaces": 2,
+        "no-multi-str": 2,
+        "no-native-reassign": 2,
+        "no-new": 2,
+        "no-new-func": 2,
+        "no-new-object": 2,
+        "no-new-wrappers": 2,
+        "no-octal-escape": 2,
+        "no-process-exit": 2,
+        "no-proto": 2,
+        "no-return-assign": 2,
+        "no-script-url": 2,
+        "no-sequences": 2,
+        "no-shadow": 2,
+        "no-shadow-restricted-names": 2,
+        "no-spaced-func": 2,
+        "no-trailing-spaces": 2,
+        "no-undef": 2,
+        "no-undef-init": 2,
+        "no-underscore-dangle": 2,
+        "no-unused-expressions": 2,
+        "no-unused-vars": 2,
+        "no-use-before-define": 2,
+        "no-with": 2,
+        "camelcase": 2,
+        "comma-dangle": 0,
+        "comma-spacing": 2,
+        "consistent-return": 2,
+        "curly": [2, "all"],
+        "dot-notation": [2, { "allowKeywords": true }],
+        "eol-last": 2,
+        "eqeqeq": 2,
+        "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
+        "keyword-spacing": 2,
+        "new-cap": 2,
+        "new-parens": 2,
+        "no-extra-parens": [2, "functions"],
+        "quotes": [1, "single"],
+        "semi": 2,
+        "semi-spacing": [2, {"before": false, "after": true}],
+        "space-infix-ops": 2,
+        "space-unary-ops": [2, { "words": true, "nonwords": false }],
+        "strict": [2, "safe"],
+        "yoda": [2, "never"],
+
+        /* START - airbnb React Style Guide */
+        "jsx-quotes": [2, "prefer-double"],
+        "react/display-name": [0, { "ignoreTranspilerName": false }],
+        "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }],
+        "react/jsx-boolean-value": [2, "never"],
+        "react/jsx-closing-bracket-location": [2, "line-aligned"],
+        "react/jsx-curly-spacing": [2, "never", { "allowMultiline": true }],
+        "react/jsx-handler-names": [0, {
+            "eventHandlerPrefix": "handle",
+            "eventHandlerPropPrefix": "on"
+        }],
+        "react/jsx-indent-props": [2, 4],
+        "react/jsx-key": 0,
+        "react/jsx-max-props-per-line": [0, { "maximum": 1 }],
+        "react/jsx-no-bind": [2, {
+            "ignoreRefs": true,
+            "allowArrowFunctions": true,
+            "allowBind": false
+        }],
+        "react/jsx-no-duplicate-props": [0, { "ignoreCase": false }],
+        "react/jsx-no-literals": 0,
+        "react/jsx-no-undef": 2,
+        "react/jsx-pascal-case": [2, {
+            "allowAllCaps": true,
+            "ignore": []
+        }],
+        "react/sort-prop-types": [0, {
+            "ignoreCase": false,
+            "callbacksLast": false
+        }],
+        "react/jsx-sort-prop-types": 0,
+        "react/jsx-sort-props": [0, {
+            "ignoreCase": false,
+            "callbacksLast": false
+        }],
+        "react/jsx-uses-react": [2, { "pragma": "React" }],
+        "react/jsx-uses-vars": 2,
+        "react/no-danger": 0,
+        "react/no-deprecated": [1, { "react": "0.14.0" }],
+        "react/no-did-mount-set-state": [2, "allow-in-func"],
+        "react/no-did-update-set-state": [2, "allow-in-func"],
+        "react/no-direct-mutation-state": 0,
+        "react/no-is-mounted": 2,
+        "react/no-multi-comp": [2, { "ignoreStateless": true }],
+        "react/no-set-state": 0,
+        "react/no-string-refs": 0,
+        "react/no-unknown-property": 2,
+        "react/prefer-es6-class": [2, "always"],
+        "react/prefer-stateless-function": 2,
+        "react/prop-types": [2, { "ignore": [], "customValidators": [] }],
+        "react/react-in-jsx-scope": 2,
+        "react/require-extension": [0, { "extensions": [".jsx"] }],
+        "react/require-render-return": 2,
+        "react/self-closing-comp": 2,
+        "react/jsx-space-before-closing": [2, "always"],
+        "react/sort-comp": [2, {
+            "order": [
+                "static-methods",
+                "lifecycle",
+                "/^on.+$/",
+                "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
+                "everything-else",
+                "/^render.+$/",
+                "render"
+            ]
+        }],
+        "react/wrap-multilines": [2, {
+            "declaration": true,
+            "assignment": true,
+            "return": true
+        }],
+        "react/jsx-first-prop-new-line": [2, "multiline"],
+        "react/jsx-equals-spacing": [2, "never"],
+        "react/jsx-indent": [2, 4],
+        "react/jsx-no-target-blank": 0,
+
+        // Accessibility Conformance
+        "jsx-a11y/aria-role": 2,
+        "jsx-a11y/aria-props": 0,
+        "jsx-a11y/aria-proptypes": 0,
+        "jsx-a11y/aria-unsupported-elements": 0,
+        "jsx-a11y/href-no-hash": 0,
+        "jsx-a11y/img-has-alt": 2,
+        "jsx-a11y/img-redundant-alt": 2,
+        "jsx-a11y/label-has-for": 0,
+        "jsx-a11y/mouse-events-have-key-events": 0,
+        "jsx-a11y/no-access-key": 2,
+        "jsx-a11y/no-onchange": 0,
+        "jsx-a11y/onclick-has-focus": 0,
+        "jsx-a11y/onclick-has-role": 0,
+        "jsx-a11y/role-has-required-aria-props": 0,
+        "jsx-a11y/role-supports-aria-props": 0,
+        "jsx-a11y/tabindex-no-positive": 0
+        /* END - airbnb React Style Guide */
+    },
+
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "15"
+        }
+    }
+}
