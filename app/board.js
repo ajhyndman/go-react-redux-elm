@@ -1,19 +1,23 @@
-/*jslint devel: true, for: true */
-/*eslint camelcase: 0, no-console: 0 */
+/*jslint devel: true */
+/*eslint no-console: 0 */
 import _ from 'underscore';
+
+import { range } from './utils';
 
 
 /*
  * board.js - Game logic for the board game Go
  */
-export default function Board(size) {
-    this.current_color = Board.BLACK;
-    this.size = size;
-    this.board = this.create_board(size);
-    this.last_move_passed = false;
-    this.in_atari = false;
-    this.attempted_suicide = false;
-};
+class Board {
+    constructor(size) {
+        this.currentColor = Board.BLACK;
+        this.size = size;
+        this.board = this.createBoard(size);
+        this.lastMovePassed = false;
+        this.inAtari = false;
+        this.attemptedSuicide = false;
+    }
+}
 
 Board.EMPTY = 0;
 Board.BLACK = 1;
@@ -22,64 +26,64 @@ Board.WHITE = 2;
 /*
  * Returns a size x size matrix with all entries initialized to Board.EMPTY
  */
-Board.prototype.create_board = function(size) {
-    var m = [];
-    for (var i = 0; i < size; i++) {
+Board.prototype.createBoard = function (size) {
+    const m = [];
+    [...range(0, size)].forEach(function (row, i) {
         m[i] = [];
-        for (var j = 0; j < size; j++) {
+        [...range(0, size)].forEach(function (col, j) {
             m[i][j] = Board.EMPTY;
-        }
-    }
+        });
+    });
     return m;
 };
 
 /*
  * Switches the current player
  */
-Board.prototype.switch_player = function() {
-    this.current_color =
-        this.current_color === Board.BLACK ? Board.WHITE : Board.BLACK;
+Board.prototype.switchPlayer = function () {
+    this.currentColor =
+        this.currentColor === Board.BLACK ? Board.WHITE : Board.BLACK;
 };
 
 /*
  * At any point in the game, a player can pass and let his opponent play
  */
-Board.prototype.pass = function() {
-    if (this.last_move_passed) {
-        this.end_game();
+Board.prototype.pass = function () {
+    if (this.lastMovePassed) {
+        this.endGame();
     }
-    this.last_move_passed = true;
-    this.switch_player();
+    this.lastMovePassed = true;
+    this.switchPlayer();
 };
 
 /*
  * Called when the game ends (both players passed)
  */
-Board.prototype.end_game = function() {
+Board.prototype.endGame = function () {
     console.log('GAME OVER');
 };
 
 /*
  * Attempt to place a stone at (i,j). Returns true iff the move was legal
  */
-Board.prototype.play = function(i, j) {
+Board.prototype.play = function (i, j) {
     console.log('Played at ' + i + ', ' + j);
-    this.attempted_suicide = this.in_atari = false;
+    this.attemptedSuicide = this.inAtari = false;
 
     if (this.board[i][j] !== Board.EMPTY) {
         return false;
     }
 
-    var color = this.board[i][j] = this.current_color;
+    var color = this.board[i][j] = this.currentColor;
     var captured = [];
-    var neighbors = this.get_adjacent_intersections(i, j);
+    var neighbors = this.getAdjacentIntersections(i, j);
     var atari = false;
 
     var self = this;
-    _.each(neighbors, function(n) {
+    _.each(neighbors, function (n) {
         var state = self.board[n[0]][n[1]];
         if (state !== Board.EMPTY && state !== color) {
-            var group = self.get_group(n[0], n[1]);
+            var group = self.getGroup(n[0], n[1]);
             console.log(group);
             if (group.liberties === 0) {
                 captured.push(group);
@@ -90,22 +94,22 @@ Board.prototype.play = function(i, j) {
     });
 
     // detect suicide
-    if (_.isEmpty(captured) && this.get_group(i, j).liberties === 0) {
+    if (_.isEmpty(captured) && this.getGroup(i, j).liberties === 0) {
         this.board[i][j] = Board.EMPTY;
-        this.attempted_suicide = true;
+        this.attemptedSuicide = true;
         return false;
     }
 
-    _.each(captured, function(group) {
-        _.each(group.stones, function(stone) {
+    _.each(captured, function (group) {
+        _.each(group.stones, function (stone) {
             self.board[stone[0]][stone[1]] = Board.EMPTY;
         });
     });
 
-    if (atari) { this.in_atari = true; }
+    if (atari) { this.inAtari = true; }
 
-    this.last_move_passed = false;
-    this.switch_player();
+    this.lastMovePassed = false;
+    this.switchPlayer();
     return true;
 };
 
@@ -113,7 +117,7 @@ Board.prototype.play = function(i, j) {
  * Given a board position, returns a list of [i,j] coordinates representing
  * orthagonally adjacent intersections
  */
-Board.prototype.get_adjacent_intersections = function(i, j) {
+Board.prototype.getAdjacentIntersections = function (i, j) {
     var neighbors = [];
     if (i > 0) {
         neighbors.push([i - 1, j]);
@@ -138,34 +142,43 @@ Board.prototype.get_adjacent_intersections = function(i, j) {
  * number of liberties the group has, and 'stones', the list of [i,j]
  * coordinates of the group's members.
  */
-Board.prototype.get_group = function(i, j) {
+Board.prototype.getGroup = function (i, j) {
 
     var color = this.board[i][j];
-    if (color === Board.EMPTY) { return null; }
+    if (color === Board.EMPTY) {
+        return null;
+    }
 
     var visited = {}; // for O(1) lookups
-    var visited_list = []; // for returning
+    var visitedList = []; // for returning
     var queue = [[i, j]];
     var count = 0;
 
     while (queue.length > 0) {
         var stone = queue.pop();
-        if (visited[stone]) { continue; }
+        if (visited[stone]) {
+            continue;
+        }
 
-        var neighbors = this.get_adjacent_intersections(stone[0], stone[1]);
+        var neighbors = this.getAdjacentIntersections(stone[0], stone[1]);
         var self = this;
         _.each(neighbors, function (n) {
             var state = self.board[n[0]][n[1]];
-            if (state === Board.EMPTY) { count += 1; }
+            if (state === Board.EMPTY) {
+                count += 1;
+            }
             if (state === color) { queue.push([n[0], n[1]]); }
         });
 
         visited[stone] = true;
-        visited_list.push(stone);
+        visitedList.push(stone);
     }
 
     return {
         'liberties': count,
-        'stones': visited_list
+        'stones': visitedList
     };
 };
+
+
+export default Board;
