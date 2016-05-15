@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const Hello = function (props) {
-    return <div>{'Hello ' + props.name}</div>;
-};
+// import { range } from './utils';
+import Board from './board';
+import { ContainerView } from './components.jsx!';
 
-Hello.propTypes = {
-    name: React.PropTypes.string,
-};
+// [...range(0, 10, 2)].forEach((value) => console.log(value));
+
+var board = new Board(19);
 
 ReactDOM.render(
-    <Hello name="World" />,
+    <ContainerView board={board} />,
     document.getElementById('app')
 );

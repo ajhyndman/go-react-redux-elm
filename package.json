@@ -3,7 +3,8 @@
     "dependencies": {
       "jsx": "github:floatdrop/plugin-jsx@^1.2.1",
       "react": "npm:react@^15.0.2",
-      "react-dom": "npm:react-dom@^15.0.2"
+      "react-dom": "npm:react-dom@^15.0.2",
+      "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",

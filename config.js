@@ -3,6 +3,7 @@ System.config({
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
+    "sourceMaps": "inline",
     "optional": [
       "runtime",
       "optimisation.modules.system"
@@ -20,6 +21,7 @@ System.config({
     "jsx": "github:floatdrop/plugin-jsx@1.2.1",
     "react": "npm:react@15.0.2",
     "react-dom": "npm:react-dom@15.0.2",
+    "underscore": "npm:underscore@1.8.3",
     "github:floatdrop/plugin-jsx@1.2.1": {
       "react-tools": "npm:react-tools@0.13.3"
     },
