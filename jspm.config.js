@@ -49,6 +49,7 @@ SystemJS.config({
     "react-dom": "npm:react-dom@15.0.2",
     "react-redux": "npm:react-redux@4.4.5",
     "redux": "npm:redux@3.5.2",
+    "redux-immutable": "npm:redux-immutable@3.0.6",
     "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
     "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
     "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
@@ -406,6 +407,11 @@ SystemJS.config({
         "process-nextick-args": "npm:process-nextick-args@1.0.7",
         "string_decoder": "npm:string_decoder@0.10.31",
         "util-deprecate": "npm:util-deprecate@1.0.2"
+      }
+    },
+    "npm:redux-immutable@3.0.6": {
+      "map": {
+        "immutable": "npm:immutable@3.8.1"
       }
     },
     "npm:redux@3.5.2": {
