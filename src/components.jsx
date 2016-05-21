@@ -3,9 +3,16 @@ import React from 'react';
 import Board from './board';
 
 
-var GRID_SIZE = 40;
+const GRID_SIZE = 40;
 
-var BoardIntersection = React.createClass({
+const BoardIntersection = React.createClass({
+    propTypes: {
+        board: React.PropTypes.object.isRequired,
+        col: React.PropTypes.array.isRequired,
+        color: React.PropTypes.string.isRequired,
+        onPlay: React.PropTypes.func.isRequired,
+        row: React.PropTypes.array.isRequired,
+    },
     handleClick: function() {
         if (this.props.board.play(this.props.row, this.props.col)) {
             this.props.onPlay();
@@ -31,44 +38,52 @@ var BoardIntersection = React.createClass({
     }
 });
 
-var BoardView = React.createClass({
-    render: function() {
-        var intersections = [];
-        for (var i = 0; i < this.props.board.size; i++)
-            for (var j = 0; j < this.props.board.size; j++)
-                intersections.push(
-                    <BoardIntersection
-                        board={this.props.board}
-                        color={this.props.board.board[i][j]}
-                        row={i}
-                        col={j}
-                        onPlay={this.props.onPlay}
-                    />
-                );
-        var style = {
-            width: this.props.board.size * GRID_SIZE,
-            height: this.props.board.size * GRID_SIZE
-        };
-        return <div style={style} id="board">{intersections}</div>;
+const BoardView = function (props) {
+    var intersections = [];
+    for (var i = 0; i < props.board.size; i++)
+        for (var j = 0; j < props.board.size; j++)
+            intersections.push(
+                <BoardIntersection
+                    board={props.board}
+                    color={props.board.board[i][j]}
+                    row={i}
+                    col={j}
+                    onPlay={props.onPlay}
+                />
+            );
+    var style = {
+        width: props.board.size * GRID_SIZE,
+        height: props.board.size * GRID_SIZE
+    };
+    return <div style={style} id="board">{intersections}</div>;
+};
+
+BoardView.propTypes = {
+    board: React.PropTypes.object.isRequired,
+    onPlay: React.PropTypes.func.isRequired,
+};
+
+const AlertView = function (props) {
+    let text = '';
+    if (props.board.in_atari) {
+        text = 'ATARI!';
+    } else if (props.board.attempted_suicide) {
+        text = 'SUICIDE!';
     }
-});
 
-var AlertView = React.createClass({
-    render: function() {
-        var text = '';
-        if (this.props.board.in_atari) {
-            text = "ATARI!";
-        } else if (this.props.board.attempted_suicide) {
-            text = "SUICIDE!";
-        }
+    return (
+        <div id="alerts">{text}</div>
+    );
+};
 
-        return (
-            <div id="alerts">{text}</div>
-        );
-    }
-});
+AlertView.propTypes = {
+    board: React.PropTypes.object.isRequired,
+};
 
-var PassView = React.createClass({
+const PassView = React.createClass({
+    propTypes: {
+        board: React.PropTypes.object.isRequired,
+    },
     handleClick: function(e) {
         this.props.board.pass();
     },
@@ -84,12 +99,15 @@ var PassView = React.createClass({
     }
 });
 
-export const ContainerView = React.createClass({
+const ContainerView = React.createClass({
+    propTypes: {
+        board: React.PropTypes.object.isRequired,
+    },
     getInitialState: function() {
         return {'board': this.props.board};
     },
     onBoardUpdate: function() {
-        this.setState({"board": this.props.board});
+        this.setState({'board': this.props.board});
     },
     render: function() {
         return (
@@ -104,3 +122,5 @@ export const ContainerView = React.createClass({
         );
     }
 });
+
+export default ContainerView;
