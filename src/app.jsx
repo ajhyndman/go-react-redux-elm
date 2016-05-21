@@ -14,16 +14,19 @@ import range from './utils/range';
 const SIZE = 19;
 
 // Tracks only the current board state
-const board = Redux.createStore(
+const store = Redux.createStore(
     reducers,
-    Immutable.List([...range(0, SIZE)].map(() => (
-        Immutable.List([...range(0, SIZE)].map(() => constants.EMPTY))
-    )))
+    Immutable.Map({
+        turn: constants.BLACK,
+        board: Immutable.List([...range(0, SIZE)].map(() => (
+            Immutable.List([...range(0, SIZE)].map(() => constants.EMPTY))
+        ))),
+    })
 );
 
 // Renders the game board
 ReactDOM.render(
-    <ReactRedux.Provider store={board}>
+    <ReactRedux.Provider store={store}>
         <GoBoard />
     </ReactRedux.Provider>,
     document.getElementById('app')
