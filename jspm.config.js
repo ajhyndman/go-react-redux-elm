@@ -40,12 +40,14 @@ SystemJS.config({
     "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
     "http": "github:jspm/nodelibs-http@0.2.0-alpha",
     "https": "github:jspm/nodelibs-https@0.2.0-alpha",
+    "immutable": "npm:immutable@3.8.1",
     "net": "github:jspm/nodelibs-net@0.2.0-alpha",
     "path": "github:jspm/nodelibs-path@0.2.0-alpha",
     "plugin-babel": "npm:systemjs-plugin-babel@0.0.10",
     "process": "github:jspm/nodelibs-process@0.2.0-alpha",
     "react": "npm:react@15.0.2",
     "react-dom": "npm:react-dom@15.0.2",
+    "redux": "npm:redux@3.5.2",
     "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
     "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
     "tty": "github:jspm/nodelibs-tty@0.2.0-alpha",
@@ -395,6 +397,14 @@ SystemJS.config({
         "process-nextick-args": "npm:process-nextick-args@1.0.7",
         "string_decoder": "npm:string_decoder@0.10.31",
         "util-deprecate": "npm:util-deprecate@1.0.2"
+      }
+    },
+    "npm:redux@3.5.2": {
+      "map": {
+        "lodash": "npm:lodash@4.12.0",
+        "lodash-es": "npm:lodash-es@4.12.0",
+        "loose-envify": "npm:loose-envify@1.2.0",
+        "symbol-observable": "npm:symbol-observable@0.2.4"
       }
     },
     "npm:sha.js@2.4.5": {
