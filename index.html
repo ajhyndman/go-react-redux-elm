@@ -6,13 +6,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>React Go Tutorial</title>
         <link type="text/css" href="style.css" rel="stylesheet" />
+        <script src="jspm_packages/system.js"></script>
+        <script src="jspm.browser.js"></script>
+        <script src="jspm.config.js"></script>
     </head>
     <body>
         <div id="app"></div>
-        <script src="jspm_packages/system.js"></script>
-        <script src="config.js"></script>
+
+        <!-- ES6 HTTP/2 style import -->
         <script type="text/javascript">
-            System.import('app/main.jsx!');
+            System.import('app/app.jsx');
         </script>
+
+        <!--
+        Preprocessed, concatenated and minified HTTP/1 style import
+        Run `npm run build` to generate this file.
+        -->
+        <!--<script src="app.js"></script>-->
     </body>
 </html>
