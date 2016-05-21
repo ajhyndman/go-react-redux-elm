@@ -39,7 +39,7 @@ const BoardIntersection = React.createClass({
 });
 
 const BoardView = function (props) {
-    var intersections = [];
+    let intersections = [];
     for (var i = 0; i < props.board.size; i++)
         for (var j = 0; j < props.board.size; j++)
             intersections.push(
@@ -51,7 +51,7 @@ const BoardView = function (props) {
                     onPlay={props.onPlay}
                 />
             );
-    var style = {
+    const style = {
         width: props.board.size * GRID_SIZE,
         height: props.board.size * GRID_SIZE
     };
@@ -99,7 +99,7 @@ const PassView = React.createClass({
     }
 });
 
-const ContainerView = React.createClass({
+const GoBoard = React.createClass({
     propTypes: {
         board: React.PropTypes.object.isRequired,
     },
@@ -123,4 +123,4 @@ const ContainerView = React.createClass({
     }
 });
 
-export default ContainerView;
+export default GoBoard;

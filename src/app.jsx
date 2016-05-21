@@ -1,3 +1,4 @@
+import Immutable from 'immutable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Redux from 'redux';
@@ -5,7 +6,7 @@ import ReactRedux from 'react-redux';
 
 import reducers from './reducers';
 import range from './utils/range';
-import ContainerView from './components.jsx!';
+import GoBoard from './components.jsx';
 
 
 // Globals
@@ -19,13 +20,15 @@ const STATE = {
 // Tracks only the current board state
 const board = Redux.createStore(
     reducers,
-    [...range(0, SIZE)].map(() => (
+    Immutable.map([...range(0, SIZE)].map(() => (
         [...range(0, SIZE)].map(() => STATE.empty)
-    ))
+    )))
 );
 
 // Renders the game board
 ReactDOM.render(
-    <ContainerView board={board} />,
+    <ReactRedux.Provider store={board}>
+        <GoBoard />
+    </ReactRedux.Provider>,
     document.getElementById('app')
 );
