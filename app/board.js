@@ -2,7 +2,7 @@
 /*eslint no-console: 0 */
 import _ from 'underscore';
 
-import { range } from './utils';
+import range from './utils/range';
 
 
 /*
@@ -27,14 +27,9 @@ Board.WHITE = 2;
  * Returns a size x size matrix with all entries initialized to Board.EMPTY
  */
 Board.prototype.createBoard = function (size) {
-    const m = [];
-    [...range(0, size)].forEach(function (row, i) {
-        m[i] = [];
-        [...range(0, size)].forEach(function (col, j) {
-            m[i][j] = Board.EMPTY;
-        });
-    });
-    return m;
+    return [...range(0, size)].map(() => (
+        [...range(0, size)].map(() => Board.EMPTY)
+    ));
 };
 
 /*
