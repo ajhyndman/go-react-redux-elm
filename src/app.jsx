@@ -20,8 +20,8 @@ const STATE = {
 // Tracks only the current board state
 const board = Redux.createStore(
     reducers,
-    Immutable.map([...range(0, SIZE)].map(() => (
-        [...range(0, SIZE)].map(() => STATE.empty)
+    Immutable.List([...range(0, SIZE)].map(() => (
+        Immutable.List([...range(0, SIZE)].map(() => STATE.empty))
     )))
 );
 
