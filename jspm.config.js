@@ -6,7 +6,7 @@ SystemJS.config({
       "meta": {
         "*.js": {
           "babelOptions": {
-            "sourceMaps": "inline",
+            "sourceMaps": "inline"
           },
           "loader": "plugin-babel"
         },
@@ -39,12 +39,14 @@ SystemJS.config({
     "constants": "github:jspm/nodelibs-constants@0.2.0-alpha",
     "core-js": "npm:core-js@2.4.0",
     "crypto": "github:jspm/nodelibs-crypto@0.2.0-alpha",
+    "css": "github:systemjs/plugin-css@0.1.21",
     "domain": "github:jspm/nodelibs-domain@0.2.0-alpha",
     "events": "github:jspm/nodelibs-events@0.2.0-alpha",
     "fs": "github:jspm/nodelibs-fs@0.2.0-alpha",
     "http": "github:jspm/nodelibs-http@0.2.0-alpha",
     "https": "github:jspm/nodelibs-https@0.2.0-alpha",
     "immutable": "npm:immutable@3.8.1",
+    "materialize-css": "npm:materialize-css@0.97.6",
     "net": "github:jspm/nodelibs-net@0.2.0-alpha",
     "path": "github:jspm/nodelibs-path@0.2.0-alpha",
     "plugin-babel": "npm:systemjs-plugin-babel@0.0.10",
@@ -346,6 +348,12 @@ SystemJS.config({
     "npm:loose-envify@1.2.0": {
       "map": {
         "js-tokens": "npm:js-tokens@1.0.3"
+      }
+    },
+    "npm:materialize-css@0.97.6": {
+      "map": {
+        "css": "github:systemjs/plugin-css@0.1.21",
+        "jquery": "github:components/jquery@2.2.1"
       }
     },
     "npm:miller-rabin@4.0.0": {
