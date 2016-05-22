@@ -1,18 +1,15 @@
 SystemJS.config({
+  sourceMaps: true,
   transpiler: "plugin-babel",
   packages: {
     "app": {
       "main": "app.js",
       "meta": {
         "*.js": {
-          "babelOptions": {
-            "sourceMaps": "inline"
-          },
           "loader": "plugin-babel"
         },
         "*.jsx": {
           "babelOptions": {
-            "sourceMaps": "inline",
             "plugins": [
               "npm:babel-plugin-transform-react-jsx@6.8.0"
             ]
