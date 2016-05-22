@@ -131,7 +131,7 @@
         "react/no-set-state": 0,
         "react/no-string-refs": 0,
         "react/no-unknown-property": 2,
-        "react/prefer-es6-class": [2, "always"],
+        "react/prefer-es6-class": 0,
         "react/prefer-stateless-function": 2,
         "react/prop-types": [2, { "ignore": [], "customValidators": [] }],
         "react/react-in-jsx-scope": 2,
