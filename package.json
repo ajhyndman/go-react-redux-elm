@@ -22,7 +22,9 @@
       "lib": "src"
     },
     "dependencies": {
+      "css": "github:systemjs/plugin-css@^0.1.21",
       "immutable": "npm:immutable@^3.8.1",
+      "materialize-css": "npm:materialize-css@^0.97.6",
       "react": "npm:react@^15.0.2",
       "react-dom": "npm:react-dom@^15.0.2",
       "react-redux": "npm:react-redux@^4.4.5",
@@ -59,6 +61,9 @@
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
     },
     "overrides": {
+      "github:components/jquery@2.2.1": {
+        "main": "jquery"
+      },
       "npm:babel-types@6.9.0": {
         "meta": {
           "lib/index.js": {
@@ -94,6 +99,25 @@
         "ignore": [
           "test.js"
         ]
+      },
+      "npm:materialize-css@0.97.6": {
+        "format": "global",
+        "main": "dist/js/materialize",
+        "dependencies": {
+          "jquery": "github:components/jquery",
+          "css": "github:systemjs/plugin-css"
+        },
+        "jspmNodeConversion": false,
+        "meta": {
+          "dist/js/materialize.js": {
+            "deps": [
+              "jquery",
+              "../css/materialize.css!"
+            ],
+            "exports": "$",
+            "format": "global"
+          }
+        }
       }
     }
   }
