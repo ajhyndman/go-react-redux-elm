@@ -1,5 +1,3 @@
-import ReduxImmutable from 'redux-immutable';
-
 import constants from './utils/constants';
 
 
@@ -25,10 +23,9 @@ const reducer = function (state, action) {
             return state;
         case constants.actionTypes.PASS:
             return state;
-        case default:
+        default:
             return state;
     }
-
 };
 
 
