@@ -1,13 +1,12 @@
 /* globals document */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'materialize-css';
 
-import GoBoard from './components.jsx';
+import Container from './components/Container.jsx';
 
 
 // Renders the game board
 ReactDOM.render(
-    <GoBoard />,
+    <Container />,
     document.getElementById('app')
 );
