@@ -1,4 +1,6 @@
 const constants = {
+    GRID_SIZE: 40,
+    SIZE: 19,
     EMPTY: 0,
     BLACK: 1,
     WHITE: 2,
