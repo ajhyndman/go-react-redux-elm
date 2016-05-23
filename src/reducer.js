@@ -91,15 +91,6 @@ const reducer = function (appState, action) {
                 map.setIn(['board', action.row, action.col], player)
                     .set('turn', opponent)
             ));
-            const liberties = getLiberties(
-                placedStone.get('board'),
-                point,
-                player
-            );
-            if (liberties === 0) {
-                console.log('Attempted suicide!');
-                return appState;
-            }
             const neighbours = getNeighbours(placedStone.get('board'), point);
             const removedDeadStones = neighbours.reduce(
                 (lastBoard, neighbour) => (
@@ -110,6 +101,15 @@ const reducer = function (appState, action) {
                 ),
                 placedStone.get('board')
             );
+            const liberties = getLiberties(
+                removedDeadStones,
+                point,
+                player
+            );
+            if (liberties === 0) {
+                console.log('Attempted suicide!');
+                return appState;
+            }
             const final = placedStone.set('board', removedDeadStones);
             return final;
         }
