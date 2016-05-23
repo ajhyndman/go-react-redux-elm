@@ -1,3 +1,5 @@
+import Immutable from 'immutable';
+
 import C from './utils/constants';
 
 
@@ -16,6 +18,7 @@ import C from './utils/constants';
  *
  */
 
+let prevState = Immutable.Map({});
 
 
 
@@ -107,10 +110,15 @@ const reducer = function (appState, action) {
                 player
             );
             if (liberties === 0) {
-                console.log('Attempted suicide!');
+                console.log('You have attempted suicide!');
                 return appState;
             }
             const final = placedStone.set('board', removedDeadStones);
+            if (final.get('board').equals(prevState.get('board'))) {
+                console.log('You have invoked Ko.  You may not play here this turn.')
+                return appState;
+            }
+            prevState = appState;
             return final;
         }
         return appState;
