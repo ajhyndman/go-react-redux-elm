@@ -74,10 +74,8 @@ const Intersection = React.createClass({
         col: React.PropTypes.number.isRequired,
         row: React.PropTypes.number.isRequired,
     },
-    componentDidMount: function () {
-        this.unsubscribe = store.subscribe(function () {
-            this.forceUpdate();
-        }.bind(this));
+    shouldComponentUpdate: function (nextProps) {
+        return nextProps !== this.props;
     },
     componentWillUnmount: function () {
         this.unsubscribe();
