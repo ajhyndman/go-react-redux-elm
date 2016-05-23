@@ -11,7 +11,7 @@ const ConnectedBoard = function (props) {
     return (
         <div className="row">
             <div
-                className="card col s12 m8 l6"
+                className="card col s12 m8 push-m2 l6 push-l3"
                 style={{ background: '#DCB771', padding: '12px' }}
             >
                 {props.board.map((row, i) => (
@@ -22,9 +22,10 @@ const ConnectedBoard = function (props) {
                     >
                         <div
                             style={{
-                                left: '-3em',
+                                color: '#222233',
+                                left: '-2em',
                                 position: 'absolute',
-                                textAlign: 'center'
+                                transform: 'translateX(-100%)',
                             }}
                         >
                             {i + 1}
@@ -54,6 +55,9 @@ const Board = React.createClass({
         this.unsubscribe = store.subscribe(function () {
             this.forceUpdate();
         }.bind(this));
+    },
+    shouldComponentUpdate: function (nextProps) {
+        return nextProps !== this.props;
     },
     componentWillUnmount: function () {
         this.unsubscribe();
