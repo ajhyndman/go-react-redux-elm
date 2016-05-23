@@ -17,24 +17,107 @@ import C from './utils/constants';
  */
 
 
+
+
+
+// get the valid neighbours of the current point
+const getNeighbours = function (board, point) {
+    const up = { row: point.row - 1, col: point.col };
+    const right = { row: point.row, col: point.col + 1 };
+    const down = { row: point.row + 1, col: point.col };
+    const left = { row: point.row, col: point.col - 1 };
+    return [up, right, down, left].filter(
+        // if the neighbour is inside the board
+        (neighbour) => (
+            (neighbour.row >= 0 && neighbour.row < board.size)
+            &&
+            (neighbour.col >= 0 && neighbour.col < board.get(neighbour.row).size)
+        )
+    );
+};
+
+// calculate the liberties of the group of a color at this point
+// NOTE: This function *can* currently count liberties multiple times,
+//       but it doesn't matter, because we only care if it's zero.
+const getLiberties = function (board, point, color) {
+    if (board.get(point.row).get(point.col) === C.VISITED) {
+        return 0; // we already counted this point
+    } else if (board.get(point.row).get(point.col) === C.EMPTY) {
+        return 1; // point is a liberty
+    } else if (board.get(point.row).get(point.col) !== color) {
+        return 0; // point has an opposing stone in it
+    }
+    const neighbours = getNeighbours(board, point);
+    const visitedBoard = board.setIn([point.row, point.col], C.VISITED);
+    return neighbours.reduce(
+        (liberties, neighbour) => liberties + getLiberties(visitedBoard, neighbour, color),
+        0
+    );
+};
+
+// find all of the stones connected to this one
+const removeGroup = function (board, point) {
+    const color = board.get(point.row).get(point.col);
+    const removedThisStone = board.setIn([point.row, point.col], C.EMPTY);
+    const neighbours = getNeighbours(board, point);
+    return neighbours.reduce(
+        (lastBoard, neighbour) => (
+            lastBoard.get(neighbour.row).get(neighbour.col) === color
+                ? removeGroup(lastBoard, neighbour)
+                : lastBoard
+        ),
+        removedThisStone
+    );
+};
+
+
+
+
+
+/**
+ * Redux Reducer function
+ */
 const reducer = function (appState, action) {
+    const player = appState.get('turn');
+    const opponent = (player === C.BLACK ? C.WHITE : C.BLACK);
     switch (action.type) {
-        case "PLACE_STONE":
-            const turn = appState.get('turn');
-            const positionState = appState.get('board')
-                                          .get(action.row)
-                                          .get(action.col);
-            if (positionState === C.EMPTY) {
-                return appState.withMutations((map) => (
-                    map.setIn(['board', action.row, action.col], turn)
-                        .set('turn', (turn === C.BLACK ? C.WHITE : C.BLACK))
-                ));
+    case C.actionTypes.PLACE_STONE:
+        const pointState = appState.get('board')
+                                        .get(action.row)
+                                        .get(action.col);
+        const point = { row: action.row, col: action.col };
+        if (pointState === C.EMPTY) {
+            const placedStone = appState.withMutations((map) => (
+                map.setIn(['board', action.row, action.col], player)
+                    .set('turn', opponent)
+            ));
+            const liberties = getLiberties(
+                placedStone.get('board'),
+                point,
+                player
+            );
+            if (liberties === 0) {
+                console.log('Attempted suicide!');
+                return appState;
             }
-            return appState;
-        case C.actionTypes.PASS:
-            return appState.set('turn', (turn === C.BLACK ? C.WHITE : C.BLACK));
-        default:
-            return appState;
+            const neighbours = getNeighbours(placedStone.get('board'), point);
+            const removedDeadStones = neighbours.reduce(
+                (lastBoard, neighbour) => (
+                    (lastBoard.get(neighbour.row).get(neighbour.col) === opponent
+                        && getLiberties(lastBoard, neighbour, opponent) === 0)
+                            ? removeGroup(lastBoard, neighbour)
+                            : lastBoard
+                ),
+                placedStone.get('board')
+            );
+            const final = placedStone.set('board', removedDeadStones);
+            return final;
+        }
+        return appState;
+    case C.actionTypes.PASS:
+        return appState.set('turn', (player === C.BLACK ? C.WHITE : C.BLACK));
+    default:
+        return appState;
     }
 };
 
