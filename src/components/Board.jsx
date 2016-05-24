@@ -20,16 +20,6 @@ const ConnectedBoard = function (props) {
                         key={i}
                         style={{ height: size + '%', position: 'relative' }}
                     >
-                        <div
-                            style={{
-                                color: '#222233',
-                                left: '-2em',
-                                position: 'absolute',
-                                transform: 'translateX(-100%)',
-                            }}
-                        >
-                            {i + 1}
-                        </div>
                         {row.map((state, j) => (
                             <Intersection
                                 col={j}
