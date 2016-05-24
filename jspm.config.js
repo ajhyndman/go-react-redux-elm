@@ -49,6 +49,7 @@ SystemJS.config({
     "plugin-babel": "npm:systemjs-plugin-babel@0.0.10",
     "process": "github:jspm/nodelibs-process@0.2.0-alpha",
     "react": "npm:react@15.0.2",
+    "react-dimensions": "npm:react-dimensions@1.1.1",
     "react-dom": "npm:react-dom@15.0.2",
     "react-redux": "npm:react-redux@4.4.5",
     "redux": "npm:redux@3.5.2",
@@ -391,6 +392,11 @@ SystemJS.config({
         "create-hash": "npm:create-hash@1.1.2",
         "parse-asn1": "npm:parse-asn1@5.0.0",
         "randombytes": "npm:randombytes@2.0.3"
+      }
+    },
+    "npm:react-dimensions@1.1.1": {
+      "map": {
+        "element-resize-event": "npm:element-resize-event@2.0.5"
       }
     },
     "npm:react-redux@4.4.5": {
