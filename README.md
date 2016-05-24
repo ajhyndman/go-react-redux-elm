@@ -13,3 +13,9 @@ Here I implement the board game go three times.
 * Third using only [Elm](http://elm-lang.org/) - (uncompleted)
 
 Each of these implementations is a complete re-write.  Each implementation was created in succession.  As I learned, or acquired new ideas, I incorporated them into new versions, without backporting.
+
+## Demos
+
+[Just React](http://ajhyndman.github.io/go-react-redux-elm/vanilla-react/)
+
+[React & Redux](http://ajhyndman.github.io/go-react-redux-elm/react-redux/)
