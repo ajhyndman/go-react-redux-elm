@@ -5,6 +5,7 @@
   },
   "scripts": {
     "build": "jspm build src/app.jsx app.js --minify",
+    "bundle": "jspm bundle app/app.jsx --skip-source-maps --watch",
     "watch": "jspm build src/app.jsx app.js --minify --watch",
     "postinstall": "jspm install"
   },
@@ -122,4 +123,5 @@
       }
     }
   }
-}
+}
+
