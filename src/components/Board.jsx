@@ -1,6 +1,7 @@
 import React from 'react';
 import 'materialize-css';
 
+import C from '../utils/constants';
 import Intersection from './Intersection.jsx';
 import store from '../store';
 
@@ -27,6 +28,14 @@ const ConnectedBoard = function (props) {
                                 row={i}
                                 state={state}
                                 width={size}
+                                isTopEdge={i === 0}
+                                isRightEdge={j === C.SIZE - 1}
+                                isBottomEdge={i === C.SIZE - 1}
+                                isLeftEdge={j === 0}
+                                isStarPoint={(
+                                    ([3, C.SIZE - 4, (C.SIZE - 1) / 2].indexOf(i) >= 0)
+                                    && ([3, C.SIZE - 4, (C.SIZE - 1) / 2].indexOf(j) >= 0)
+                                )}
                             />
                         ))}
                     </div>
