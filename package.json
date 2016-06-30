@@ -1,0 +1,13 @@
+{
+    "name": "go-react-redux-elm",
+    "summary": "I Implement the same Go Board with Vanilla React, React + Redux & Elm",
+    "scripts": {
+        "build": "elm-make src/app.elm --output=app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": "https://github.com/ajhyndman/go-react-redux-elm.git",
+    "license": "MIT",
+    "devDependencies": {
+        "elm": "^0.17.0"
+    }
+}

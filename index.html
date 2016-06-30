@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Go :: React + Redux</title>
+        <script src="build.js"></script>
+    </head>
+    <body class="blue-grey lighten-5">
+        <div id="app"></div>
+
+        <!--
+        Preprocessed, concatenated and minified HTTP/1 style import
+        Run `npm run build` to generate this file.
+        -->
+        <script src="app.js"></script>
+        <script type="text/javascript">
+            // get a reference to the div where we will show our UI
+            const container = document.getElementById('app');
+
+            // start the elm app in the container
+            // and keep a reference for communicating with the appp
+            const app = Elm.Main.embed(container);
+        </script>
+    </body>
+</html>
