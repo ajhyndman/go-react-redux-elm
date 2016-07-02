@@ -14,9 +14,9 @@ stone color containerWidth =
         A.style
           [
             ("background", if color == Model.Black then "#101015" else "#EEEEF0"),
-            ("borderRadius", "9001px"),
+            ("border-radius", "9001px"),
             (
-              "boxShadow",
+              "box-shadow",
               (if color == Model.Black
                 then "inset 0 " ++ toString (w / 6) ++ "px " ++ toString (w / 3) ++ "px 0 rgba(255,255,255,.2),"
                 else "inset 0 " ++ toString (-w / 6) ++ "px " ++ toString (w / 3) ++ "px 0 rgba(0,0,0,.16),")
