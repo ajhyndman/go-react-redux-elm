@@ -44,6 +44,7 @@ const ConnectedIntersection = function (props) {
                     />
                     : null
                 )}
+                // Grid Lines
                 <div
                     style={{
                         background: '#63380E',
