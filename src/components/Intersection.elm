@@ -9,6 +9,8 @@ import Model
 
 
 type alias IntersectionProps = {
+  col: Int,
+  row: Int,
   isTopEdge: Bool,
   isRightEdge: Bool,
   isLeftEdge: Bool,
@@ -67,7 +69,7 @@ intersection props =
                   ]
               ] []
             else
-              H.div [] []),
+              H.text ""),
           -- Grid Lines
           H.div
             [
@@ -97,8 +99,8 @@ intersection props =
             ] [],
           -- Render a stone if someone played here.
           case props.state of
-            Model.Black -> stone Model.Black props.width
-            Model.White -> stone Model.White props.width
-            Model.Empty -> H.div [] []
+            Model.Black -> stone Model.Black C.grid_spacing
+            Model.White -> stone Model.White C.grid_spacing
+            Model.Empty -> H.text ""
         ]
     ]
