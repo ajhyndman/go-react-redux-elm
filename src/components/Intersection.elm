@@ -2,10 +2,12 @@ module Components.Intersection exposing (intersection)
 
 import Html as H
 import Html.Attributes as A
+import Html.Events as E
 
 import Constants as C
 import Components.Stone exposing (stone)
 import Model
+import Update
 
 
 type alias IntersectionProps = {
@@ -20,7 +22,7 @@ type alias IntersectionProps = {
   width: Float
 }
 
-intersection : IntersectionProps -> H.Html message
+intersection : IntersectionProps -> H.Html Update.Action
 intersection props =
   -- Layout
   H.div
@@ -39,6 +41,7 @@ intersection props =
       -- Wrapper
       H.div
         [
+          E.onClick (Update.PLACE_STONE props.row props.col),
           A.style
             [
               ("cursor", (if props.state == Model.Empty then "pointer" else "auto")),

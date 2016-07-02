@@ -7,9 +7,10 @@ import Html.Attributes as A
 import Components.Intersection exposing (intersection)
 import Constants as C
 import Model
+import Update
 
 
-board : Model.Board -> H.Html message
+board : Model.Board -> H.Html Update.Action
 board boardState =
   let size = 100 / toFloat (Array.length boardState) in
     H.div [A.class "row"] [
