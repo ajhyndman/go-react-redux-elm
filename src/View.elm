@@ -6,7 +6,7 @@ import Html.Events as E
 
 import Model
 import Update
-import Stone exposing (stone)
+import Components.Stone exposing (stone)
 
 
 view : Model.Model -> H.Html a

@@ -1,4 +1,4 @@
-module Stone exposing (stone)
+module Components.Stone exposing (stone)
 
 import Html as H
 import Html.Attributes as A
