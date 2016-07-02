@@ -1,12 +1,14 @@
 module Model exposing (..)
 
+import Array
+
 import Constants as C
 
 
 type Color = Black | White | Empty
 
 type alias Board =
-  List (List Color)
+  Array.Array (Array.Array Color)
 
 type alias Model =
   {
@@ -19,7 +21,11 @@ init =
   {
     turn = Black,
     board =
-      List.map
-        (\row -> List.map (\row -> Empty) [1..C.grid_size])
-        [1..C.grid_size]
+      Array.initialize
+        C.grid_size
+        (\i ->
+          Array.initialize
+            C.grid_size
+            (always Empty)
+        )
   }

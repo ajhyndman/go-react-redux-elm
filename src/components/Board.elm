@@ -1,5 +1,6 @@
 module Components.Board exposing (board)
 
+import Array
 import Html as H
 import Html.Attributes as A
 
@@ -10,20 +11,20 @@ import Model
 
 board : Model.Board -> H.Html message
 board boardState =
-  let size = 100 / toFloat (List.length boardState) in
+  let size = 100 / toFloat (Array.length boardState) in
     H.div [A.class "row"] [
       H.div [
         A.class "card col s12 m8 push-m2 l6 push-l3",
         A.style [("background", "#DCB771"), ("padding", "12px")]
       ]
-      (List.indexedMap
+      (Array.toList (Array.indexedMap
         (\i row ->
           H.div
             [
               A.class "clearfix",
               A.style [("height", toString size ++ "%"), ("position", "relative")]
             ]
-            (List.indexedMap
+            (Array.toList (Array.indexedMap
               (\j intersectionState ->
                 intersection {
                   col = j,
@@ -38,6 +39,6 @@ board boardState =
                   state = intersectionState,
                   width = size
                 })
-              row))
-      boardState)
+              row)))
+      boardState))
     ]
