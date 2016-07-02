@@ -7,21 +7,12 @@ import Html.Events as E
 import Constants as C
 import Model
 import Update
-import Components.Intersection exposing (intersection)
+import Components.Board exposing (board)
 
 
 view : Model.Model -> H.Html a
 view model =
-  H.div
-    []
+  H.div [A.class "container"]
     [
-      intersection {
-        isBottomEdge = False,
-        isLeftEdge = False,
-        isRightEdge = False,
-        isTopEdge = False,
-        isStarPoint = True,
-        state = Model.Black,
-        width = C.grid_spacing
-      }
+      board model.board
     ]
