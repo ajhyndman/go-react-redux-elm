@@ -58,7 +58,7 @@ const getLiberties = function (board, point, color) {
     );
 };
 
-// find all of the stones connected to this one
+// find and remove all of the stones connected to this one
 const removeGroup = function (board, point) {
     const color = board.get(point.row).get(point.col);
     const removedThisStone = board.setIn([point.row, point.col], C.EMPTY);
