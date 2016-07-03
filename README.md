@@ -10,12 +10,14 @@ Here I implement the board game go three times.
 
 * First using facebook's [ReactJS](https://facebook.github.io/react/) by itself - [tag](https://github.com/ajhyndman/go-react-redux-elm/releases/tag/Vanilla-React)
 * Second adding in [Redux](http://redux.js.org/) - [tag](https://github.com/ajhyndman/go-react-redux-elm/releases/tag/React-Redux)
-* Third using only [Elm](http://elm-lang.org/) - (uncompleted)
+* Third using only [Elm](http://elm-lang.org/) - [tag](https://github.com/ajhyndman/go-react-redux-elm/releases/tag/Elm)
 
-Each of these implementations is a complete re-write.  Each implementation was created in succession.  As I learned, or acquired new ideas, I incorporated them into new versions, without backporting.
+The initial Vanilla React app is a direct implementation of Chris LaRose's tutorial above.  The React-Redux and Elm versions are my take, and meant to be exact replicas of one another.
 
 ## Demos
 
 [Just React](http://ajhyndman.github.io/go-react-redux-elm/vanilla-react/)
 
 [React & Redux](http://ajhyndman.github.io/go-react-redux-elm/react-redux/)
+
+[Elm](http://ajhyndman.github.io/go-react-redux-elm/elm/)
