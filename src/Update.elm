@@ -90,7 +90,7 @@ removeGroup board point =
       nextBoard
     )
 
--- Analogous to the main Redux Reducers
+-- Analogous to the main Redux Reducer
 update : Action -> Model.Model -> Model.Model
 update action model =
   case action of
