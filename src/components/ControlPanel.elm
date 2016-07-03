@@ -15,13 +15,13 @@ type alias Props = {
 
 controlPanel props =
   H.div [A.class "row", A.style [("text-align", "center")]]
-  [
-    H.div [A.class "col s4", A.style [("text-align", "center")]]
-      [
-        turnIndicator { color = props.turn, size = C.grid_spacing * 2 }
-      ],
-    H.div [A.class "col s4", A.style [("text-align", "center")]]
-      [
-        passButton {}
-      ]
-  ]
+    [
+      H.div [A.class "col s4", A.style [("text-align", "center")]]
+        [
+          turnIndicator { color = props.turn, size = C.grid_spacing * 2 }
+        ],
+      H.div [A.class "col s4", A.style [("text-align", "center")]]
+        [
+          passButton {}
+        ]
+    ]
