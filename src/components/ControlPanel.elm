@@ -7,12 +7,14 @@ import Components.PassButton exposing (passButton)
 import Components.TurnIndicator exposing (turnIndicator)
 import Constants as C
 import Model
+import Update
 
 
 type alias Props = {
   turn: Model.Color
 }
 
+controlPanel : Props -> H.Html Update.Action
 controlPanel props =
   H.div [A.class "row", A.style [("text-align", "center")]]
     [
