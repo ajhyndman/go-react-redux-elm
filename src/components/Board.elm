@@ -10,9 +10,13 @@ import Model
 import Update
 
 
-board : Model.Board -> H.Html Update.Action
-board boardState =
-  let size = 100 / toFloat (Array.length boardState) in
+type alias Props = {
+  boardState: Model.Board
+}
+
+board : Props -> H.Html Update.Action
+board props =
+  let size = 100 / toFloat (Array.length props.boardState) in
     H.div [A.class "row"] [
       H.div [
         A.class "card col s12 m8 push-m2 l6 push-l3",
@@ -41,5 +45,5 @@ board boardState =
                   width = size
                 })
               row)))
-      boardState))
+      props.boardState))
     ]

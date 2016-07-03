@@ -10,7 +10,7 @@ import Model
 import Update
 
 
-type alias IntersectionProps = {
+type alias Props = {
   col: Int,
   row: Int,
   isTopEdge: Bool,
@@ -22,7 +22,7 @@ type alias IntersectionProps = {
   width: Float
 }
 
-intersection : IntersectionProps -> H.Html Update.Action
+intersection : Props -> H.Html Update.Action
 intersection props =
   -- Layout
   H.div
@@ -102,8 +102,8 @@ intersection props =
             ] [],
           -- Render a stone if someone played here.
           case props.state of
-            Model.Black -> stone Model.Black C.grid_spacing
-            Model.White -> stone Model.White C.grid_spacing
+            Model.Black -> stone { color = Model.Black, containerWidth = C.grid_spacing }
+            Model.White -> stone { color = Model.White, containerWidth = C.grid_spacing }
             Model.Empty -> H.text ""
         ]
     ]
