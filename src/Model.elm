@@ -13,6 +13,10 @@ type alias Board =
 type alias Model =
   {
     turn: Color,
+    captures: {
+      black: Int,
+      white: Int
+    },
     board: Board,
     history: List Board
   }
@@ -21,6 +25,10 @@ init : Model
 init =
   {
     turn = Black,
+    captures = {
+      black = 0,
+      white = 0
+    },
     board =
       Array.initialize
         C.grid_size
