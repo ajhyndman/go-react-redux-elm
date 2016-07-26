@@ -121,23 +121,20 @@ update action model =
                 turn = if model.turn == Model.Black then Model.White else Model.Black
               }
             neighbours = getNeighbours tryStone.board point
-            removedDeadStones = neighbours |> (List.foldl
-              (\neighbour prevBoard ->
+            (removedDeadStones, captureCount) = neighbours |> (List.foldl
+              (\neighbour prev ->
                 let
                   neighbourColor = getIn neighbour.row neighbour.col Model.Empty prevBoard
                   neighbourLiberties = getLiberties prevBoard neighbour opponent
+                  (prevBoard, prevCount) = prev
                 in
                   if neighbourColor == opponent && neighbourLiberties == 0
                   then
-                    let
-                      (board, stonesRemoved) = removeGroup prevBoard neighbour 0
-                      logger = (Debug.log "You captured stones:" stonesRemoved)
-                    in
-                      board
+                    removeGroup prevBoard neighbour prevCount
                   else
-                    prevBoard
+                    prev
               )
-              tryStone.board
+              (tryStone.board, 0)
             )
             liberties = getLiberties removedDeadStones point player
           in
@@ -148,6 +145,21 @@ update action model =
                 final =
                   { tryStone
                   | board = removedDeadStones,
+                    captures =
+                      let
+                        captures = model.captures
+                      in
+                        case model.turn of
+                          Model.Black ->
+                            { captures
+                            | black = captures.black + captureCount
+                            }
+                          Model.White ->
+                            { captures
+                            | white = captures.white + captureCount
+                            }
+                          _ ->
+                            captures,
                     history = model.board :: model.history
                   }
                 prevState = List.head model.history
