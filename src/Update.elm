@@ -95,20 +95,6 @@ removeGroup board point removedCount =
       (nextBoard, removedCount + 1)
     )
 
--- -- calculate the size of a group
--- countGroup : Model.Board -> Point -> Int
--- countGroup board point =
---   let
---     thisRow = Maybe.withDefault Array.empty (Array.get point.row board)
---     thisColor = Maybe.withDefault Model.Empty (Array.get point.col thisRow)
---     neighbours = getNeighbours board point
---   in
---     neightbours |> (
---       List.foldl (
---         \neighbour
---       )
---     )
-
 -- Analogous to the main Redux Reducer
 update : Action -> Model.Model -> Model.Model
 update action model =
