@@ -32,7 +32,7 @@ controlPanel props =
         ],
       H.div [A.class "col s2"]
         [
-          H.div [A.class "row"]
+          H.div [A.class "row", A.style [("position", "relative")]]
             [
               turnIndicator { color = Model.Black, size = 20 },
               H.span [A.class "badge", A.style [("color", "white")]]
@@ -40,7 +40,7 @@ controlPanel props =
                   H.text (toString props.captures.black)
                 ]
             ],
-          H.div [A.class "row"]
+          H.div [A.class "row", A.style [("position", "relative")]]
             [
               turnIndicator { color = Model.White, size = 20 },
               H.span [A.class "badge", A.style [("color", "white")]]
