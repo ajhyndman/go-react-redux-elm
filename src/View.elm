@@ -25,7 +25,10 @@ view model =
         [
           H.div [A.class "container"]
             [
-              controlPanel { turn = model.turn }
+              controlPanel {
+                captures = model.captures,
+                turn = model.turn
+              }
             ]
         ]
     ]
