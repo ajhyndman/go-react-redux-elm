@@ -68,8 +68,8 @@ getLiberties board point color =
         )
 
 -- find and remove all of the stones connected to this one
-removeGroup : Model.Board -> Point -> Model.Board
-removeGroup board point =
+removeGroup : Model.Board -> Point -> Int -> (Model.Board, Int)
+removeGroup board point removedCount =
   let
     thisRow = Maybe.withDefault Array.empty (Array.get point.row board)
     thisColor = Maybe.withDefault Model.Empty (Array.get point.col thisRow)
@@ -80,15 +80,34 @@ removeGroup board point =
         (Array.set point.col Model.Empty thisRow)
         board
   in
-    neighbours |> (List.foldl
-      (\neighbour prevBoard ->
-        if (getIn neighbour.row neighbour.col Model.Empty prevBoard == thisColor)
-        then
-          removeGroup prevBoard neighbour
-        else
-          prevBoard)
-      nextBoard
+    neighbours |> (
+      List.foldl (
+        \neighbour prev ->
+          let
+            (prevBoard, prevCount) = prev
+          in
+            if (getIn neighbour.row neighbour.col Model.Empty prevBoard == thisColor)
+            then
+              removeGroup prevBoard neighbour prevCount
+            else
+              prev
+      )
+      (nextBoard, removedCount + 1)
     )
+
+-- -- calculate the size of a group
+-- countGroup : Model.Board -> Point -> Int
+-- countGroup board point =
+--   let
+--     thisRow = Maybe.withDefault Array.empty (Array.get point.row board)
+--     thisColor = Maybe.withDefault Model.Empty (Array.get point.col thisRow)
+--     neighbours = getNeighbours board point
+--   in
+--     neightbours |> (
+--       List.foldl (
+--         \neighbour
+--       )
+--     )
 
 -- Analogous to the main Redux Reducer
 update : Action -> Model.Model -> Model.Model
@@ -123,8 +142,14 @@ update action model =
                   neighbourLiberties = getLiberties prevBoard neighbour opponent
                 in
                   if neighbourColor == opponent && neighbourLiberties == 0
-                  then removeGroup prevBoard neighbour
-                  else prevBoard
+                  then
+                    let
+                      (board, stonesRemoved) = removeGroup prevBoard neighbour 0
+                      logger = (Debug.log "You captured stones:" stonesRemoved)
+                    in
+                      board
+                  else
+                    prevBoard
               )
               tryStone.board
             )
