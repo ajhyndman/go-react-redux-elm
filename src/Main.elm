@@ -1,15 +1,15 @@
 module Main exposing (main)
 
-import Html.App as App
+import Html
 
 import Model
 import Update
 import View
 
 
-main : Program Never
+main : Program Never Model.Model Update.Action
 main =
-  App.beginnerProgram
+  Html.beginnerProgram
     {
       model = Model.init,
       update = Update.update,
