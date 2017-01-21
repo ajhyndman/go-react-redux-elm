@@ -12,7 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "chokidar-cli": "^1.2.0",
-    "elm": "^0.17.0",
+    "elm": "^0.18.0",
     "materialize-css": "^0.97.6"
   }
 }
