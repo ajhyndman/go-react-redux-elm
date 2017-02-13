@@ -6,6 +6,7 @@
   "scripts": {
     "build": "jspm build src/app.jsx app.js --minify",
     "bundle": "jspm bundle app/app.jsx --skip-source-maps --watch",
+    "serve": "http-server",
     "watch": "jspm build src/app.jsx app.js --minify --watch",
     "postinstall": "jspm install"
   },
@@ -14,6 +15,7 @@
     "eslint-plugin-jsx-a11y": "^1.2.0",
     "eslint-plugin-no-class": "^0.1.0",
     "eslint-plugin-react": "^5.1.1",
+    "http-server": "^0.9.0",
     "jspm": "git+ssh://git@github.com/jspm/jspm-cli.git#0.17.0-beta.14"
   },
   "jspm": {

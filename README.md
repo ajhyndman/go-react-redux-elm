@@ -21,3 +21,9 @@ The initial Vanilla React app is a direct implementation of Chris LaRose's tutor
 [React & Redux](http://ajhyndman.github.io/go-react-redux-elm/react-redux/)
 
 [Elm](http://ajhyndman.github.io/go-react-redux-elm/elm/)
+
+## Development
+
+To serve on port 8080:
+
+`npm run serve`
