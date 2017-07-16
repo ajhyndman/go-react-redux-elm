@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Board from './Board.jsx';
-import ControlPanel from './ControlPanel.jsx';
+import Board from './components/Board';
+import ControlPanel from './components/ControlPanel';
 
 
-const Container = () => (
+const App = () => (
     <div>
         <div className="container">
             <Board />
@@ -24,4 +24,4 @@ const Container = () => (
 );
 
 
-export default Container;
+export default App;

@@ -2,7 +2,7 @@ import React from 'react';
 import 'materialize-css';
 
 import C from '../utils/constants';
-import Intersection from './Intersection.jsx';
+import Intersection from './Intersection';
 import store from '../store';
 
 

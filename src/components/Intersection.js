@@ -2,7 +2,7 @@ import React from 'react';
 import 'materialize-css';
 
 import C from '../utils/constants';
-import Stone from './Stone.jsx';
+import Stone from './Stone';
 import store from '../store';
 
 
@@ -44,7 +44,7 @@ const ConnectedIntersection = function (props) {
                     />
                     : null
                 )}
-                // Grid Lines
+                {/* Grid Lines */}
                 <div
                     style={{
                         background: '#63380E',
@@ -87,7 +87,7 @@ ConnectedIntersection.propTypes = {
     isBottomEdge: React.PropTypes.bool.isRequired,
     isStarPoint: React.PropTypes.bool.isRequired,
     onClick: React.PropTypes.func,
-    state: React.PropTypes.object.isRequired,
+    state: React.PropTypes.number.isRequired,
     width: React.PropTypes.number.isRequired,
 };
 

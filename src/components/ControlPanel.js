@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PassButton from './PassButton.jsx';
-import TurnIndicator from './TurnIndicator.jsx';
+import PassButton from './PassButton';
+import TurnIndicator from './TurnIndicator';
 
 
 const ControlPanel = () => (

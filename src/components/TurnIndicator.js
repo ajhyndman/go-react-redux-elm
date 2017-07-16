@@ -2,7 +2,7 @@ import React from 'react';
 
 import C from '../utils/constants';
 import store from '../store';
-import Stone from './Stone.jsx';
+import Stone from './Stone';
 
 
 const ConnectedTurnIndicator = (props) => (
