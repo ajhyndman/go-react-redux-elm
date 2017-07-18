@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import C from '../utils/constants';
 import store from '../store';
@@ -17,25 +18,28 @@ const ConnectedTurnIndicator = props =>
   </div>;
 
 ConnectedTurnIndicator.propTypes = {
-  color: React.PropTypes.string.isRequired,
-  size: React.PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
 };
 
-const TurnIndicator = React.createClass({
-  componentDidMount: function() {
+class TurnIndicator extends React.Component {
+  componentDidMount() {
     this.unsubscribe = store.subscribe(
       function() {
         this.forceUpdate();
       }.bind(this),
     );
-  },
-  shouldComponentUpdate: function(nextProps) {
+  }
+
+  shouldComponentUpdate(nextProps) {
     return nextProps !== this.props;
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     this.unsubscribe();
-  },
-  render: function() {
+  }
+
+  render() {
     const state = store.getState();
     return (
       <ConnectedTurnIndicator
@@ -43,7 +47,7 @@ const TurnIndicator = React.createClass({
         {...this.props}
       />
     );
-  },
-});
+  }
+}
 
 export default TurnIndicator;

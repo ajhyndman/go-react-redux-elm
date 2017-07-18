@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'materialize-css';
 
 import C from '../utils/constants';
@@ -45,27 +46,30 @@ const ConnectedBoard = function(props) {
 };
 
 ConnectedBoard.propTypes = {
-  board: React.PropTypes.object.isRequired,
+  board: PropTypes.object.isRequired,
 };
 
-const Board = React.createClass({
-  componentDidMount: function() {
+class Board extends React.Component {
+  componentDidMount() {
     this.unsubscribe = store.subscribe(
       function() {
         this.forceUpdate();
       }.bind(this),
     );
-  },
-  shouldComponentUpdate: function(nextProps) {
+  }
+
+  shouldComponentUpdate(nextProps) {
     return nextProps !== this.props;
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     this.unsubscribe();
-  },
-  render: function() {
+  }
+
+  render() {
     const state = store.getState();
     return <ConnectedBoard board={state.get('board')} />;
-  },
-});
+  }
+}
 
 export default Board;

@@ -75,7 +75,7 @@ const reducer = function(appState, action) {
   const player = appState.get('turn');
   const opponent = player === C.BLACK ? C.WHITE : C.BLACK;
   switch (action.type) {
-    case C.actionTypes.PLACE_STONE:
+    case C.actionTypes.PLACE_STONE: {
       const pointState = appState.get('board').get(action.row).get(action.col);
       const point = { row: action.row, col: action.col };
       if (pointState === C.EMPTY) {
@@ -95,11 +95,13 @@ const reducer = function(appState, action) {
         );
         const liberties = getLiberties(removedDeadStones, point, player);
         if (liberties === 0) {
+          // eslint-disable-next-line no-console
           console.log('You have attempted suicide!');
           return appState;
         }
         const final = placedStone.set('board', removedDeadStones);
         if (final.get('board').equals(prevState.get('board'))) {
+          // eslint-disable-next-line no-console
           console.log('You have invoked Ko.  You may not play here this turn.');
           return appState;
         }
@@ -107,6 +109,7 @@ const reducer = function(appState, action) {
         return final;
       }
       return appState;
+    }
     case C.actionTypes.PASS:
       return appState.set('turn', player === C.BLACK ? C.WHITE : C.BLACK);
     default:

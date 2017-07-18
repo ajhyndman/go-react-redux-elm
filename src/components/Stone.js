@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dimensions from 'react-dimensions';
 
 const Stone = function(props) {
@@ -34,8 +35,8 @@ const Stone = function(props) {
 };
 
 Stone.propTypes = {
-  color: React.PropTypes.string.isRequired,
-  containerWidth: React.PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  containerWidth: PropTypes.number.isRequired,
 };
 
 export default Dimensions()(Stone);

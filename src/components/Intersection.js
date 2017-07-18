@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'materialize-css';
 
 import C from '../utils/constants';
@@ -79,37 +80,47 @@ const ConnectedIntersection = function(props) {
 };
 
 ConnectedIntersection.propTypes = {
-  isTopEdge: React.PropTypes.bool.isRequired,
-  isRightEdge: React.PropTypes.bool.isRequired,
-  isLeftEdge: React.PropTypes.bool.isRequired,
-  isBottomEdge: React.PropTypes.bool.isRequired,
-  isStarPoint: React.PropTypes.bool.isRequired,
-  onClick: React.PropTypes.func,
-  state: React.PropTypes.number.isRequired,
-  width: React.PropTypes.number.isRequired,
+  isTopEdge: PropTypes.bool.isRequired,
+  isRightEdge: PropTypes.bool.isRequired,
+  isLeftEdge: PropTypes.bool.isRequired,
+  isBottomEdge: PropTypes.bool.isRequired,
+  isStarPoint: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
+  state: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
-const Intersection = React.createClass({
-  propTypes: {
-    col: React.PropTypes.number.isRequired,
-    row: React.PropTypes.number.isRequired,
-  },
-  shouldComponentUpdate: function(nextProps) {
+class Intersection extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
     return nextProps !== this.props;
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     this.unsubscribe();
-  },
-  onClick: function() {
+  }
+
+  onClick() {
     store.dispatch({
       col: this.props.col,
       row: this.props.row,
       type: C.actionTypes.PLACE_STONE,
     });
-  },
-  render: function() {
+  }
+
+  render() {
     return <ConnectedIntersection {...this.props} onClick={this.onClick} />;
-  },
-});
+  }
+}
+
+Intersection.propTypes = {
+  col: PropTypes.number.isRequired,
+  row: PropTypes.number.isRequired,
+};
 
 export default Intersection;

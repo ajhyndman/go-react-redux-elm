@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'materialize-css';
 
 import C from '../utils/constants';
@@ -13,30 +14,39 @@ const ConnectedPassButton = props =>
   </button>;
 
 ConnectedPassButton.propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 };
 
-const PassButton = React.createClass({
-  componentDidMount: function() {
+class PassButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  componentDidMount() {
     this.unsubscribe = store.subscribe(
       function() {
         this.forceUpdate();
       }.bind(this),
     );
-  },
-  shouldComponentUpdate: function(nextProps) {
+  }
+
+  shouldComponentUpdate(nextProps) {
     return nextProps !== this.props;
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     this.unsubscribe();
-  },
-  onClick: function() {
+  }
+
+  onClick() {
     store.dispatch({ type: C.actionTypes.PASS });
-  },
-  render: function() {
-    const state = store.getState();
+  }
+
+  render() {
     return <ConnectedPassButton onClick={this.onClick} />;
-  },
-});
+  }
+}
 
 export default PassButton;
