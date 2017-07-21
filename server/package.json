@@ -1,0 +1,9 @@
+{
+  "name": "go-redux-server",
+  "version": "0.1.0",
+  "description": "A server mapping a single redux store to a GraphQL API",
+  "main": "index.js",
+  "repository": "https://github.com/ajhyndman/go-react-redux-elm.git",
+  "author": "ajhyndman@hotmail.com",
+  "license": "MIT"
+}
