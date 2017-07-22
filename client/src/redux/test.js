@@ -1,5 +1,7 @@
 // @flow
 /* eslint-env jest */
+import Observable from 'zen-observable';
+
 import { createStore } from '.';
 
 describe('redux', () => {
@@ -69,6 +71,79 @@ describe('redux', () => {
       actionList.forEach(store.dispatch);
 
       expect(store.getState()).toEqual(actionList.reduce(reducer, init));
+    });
+  });
+});
+
+describe('playground', () => {
+  describe('Observable', () => {
+    test('.of emits arguments sequentially', () => {
+      const log = Observable.of(1, 2, 3);
+
+      const subscriber = jest.fn();
+
+      log.subscribe(subscriber);
+
+      expect(subscriber).toHaveBeenCalledTimes(3);
+      expect(subscriber.mock.calls).toEqual([[1], [2], [3]]);
+    });
+
+    test('.from accepts a generator', () => {
+      function* range(max: number) {
+        for (let i = 0; i < max; i += 1) {
+          yield i;
+        }
+        return;
+      }
+      const log = Observable.from(range(3));
+
+      const subscriber = jest.fn();
+
+      log.subscribe(subscriber);
+
+      expect(subscriber).toHaveBeenCalledTimes(3);
+      expect(subscriber.mock.calls).toEqual([[0], [1], [2]]);
+    });
+
+    test('Constructor form accepts a function', () => {
+      function* range(max: number) {
+        for (let i = 0; i < max; i += 1) {
+          yield i;
+        }
+        return;
+      }
+      const log = new Observable(observer => {
+        const myRange = range(3);
+        [...myRange].forEach(value => {
+          observer.next(value);
+        });
+      });
+
+      const subscriber = jest.fn();
+
+      log.subscribe(subscriber);
+
+      expect(subscriber).toHaveBeenCalledTimes(3);
+      expect(subscriber.mock.calls).toEqual([[0], [1], [2]]);
+    });
+
+    test('Constructor form handles async events', () => {
+      jest.useFakeTimers();
+
+      const log = new Observable(observer => {
+        setTimeout(() => observer.next(0), 1000);
+        setTimeout(() => observer.next(1), 2000);
+        setTimeout(() => observer.next(2), 3000);
+      });
+
+      const subscriber = jest.fn();
+      log.subscribe(subscriber);
+
+      expect(subscriber).toHaveBeenCalledTimes(0);
+
+      jest.runAllTimers();
+      expect(subscriber).toHaveBeenCalledTimes(3);
+      expect(subscriber.mock.calls).toEqual([[0], [1], [2]]);
     });
   });
 });
