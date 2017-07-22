@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "babel-jest": "^20.0.3",
     "eslint": "^4.2.0",
     "eslint-config-ajhyndman": "git://github.com/ajhyndman/eslint-config-ajhyndman.git",
     "eslint-config-prettier": "^2.3.0",
-    "jest": "^20.0.4",
+    "flow-bin": "^0.51.0",
     "prettier": "^1.5.3",
     "react-scripts": "1.0.10"
   },
