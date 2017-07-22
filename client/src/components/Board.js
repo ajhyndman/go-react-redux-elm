@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'materialize-css';
 
 import C from '../utils/constants';
 import Intersection from './Intersection';
