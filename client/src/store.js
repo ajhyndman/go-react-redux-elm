@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
-import { createStore } from 'redux';
 
+import { createStore } from './redux';
 import C from './utils/constants';
 import reducer from './reducer';
 
