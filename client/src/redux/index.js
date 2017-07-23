@@ -3,18 +3,29 @@ import Observable from 'zen-observable';
 
 type Subscriber = () => void;
 
+const SERVER_URI = 'ws://localhost:8080';
+
+const socket = new WebSocket(SERVER_URI);
+
 export function createStore<T>(
   reducer: (state?: T, action: Object) => T,
   init?: T,
 ) {
   // This is our primary event stream
-  let actionObserver;
-  const actionLog = new Observable(o => {
-    actionObserver = o;
+  const next = action => {
+    if (socket.readyState !== WebSocket.OPEN) return;
+    socket.send(JSON.stringify(action));
+  };
+
+  const actionLog = new Observable(observer => {
+    socket.addEventListener('message', message => {
+      observer.next(JSON.parse(message.data));
+    });
   });
-  actionLog.subscribe(() => {
+  actionLog.subscribe(action => {
     // PASS
     // ES6 Observables require a subscriber, or they will not produce events.
+    console.log(action.type, action);
   });
 
   // Map our primary event stream to a stream of events containing our
@@ -36,9 +47,10 @@ export function createStore<T>(
 
   return {
     dispatch(action: Object) {
-      actionObserver.next(action);
+      next(action);
     },
     getState() {
+      console.log('getState was called, and returned:', state);
       return state;
     },
     subscribe(subscriber: Subscriber) {
