@@ -23,7 +23,7 @@ export function createStore<T>(
   const stateLog = actionLog.map(action => {
     state = reducer(state, action);
     return state;
-  }, init);
+  });
 
   // ES6 Observables may only have one subscriber at a time.  This means
   // that we must handle notifying multiple redux store ubscribers ourselves
