@@ -146,4 +146,79 @@ describe('playground', () => {
       expect(subscriber.mock.calls).toEqual([[0], [1], [2]]);
     });
   });
+
+  test('Constructor form lets us bind observer to external variable', () => {
+    jest.useFakeTimers();
+    const subscriber = jest.fn();
+
+    let observer;
+    const log = new Observable(o => {
+      observer = o;
+    });
+
+    log.subscribe(subscriber);
+    observer.next('apple');
+
+    expect(subscriber).toHaveBeenCalledTimes(1);
+    expect(subscriber.mock.calls).toEqual([['apple']]);
+
+    setTimeout(() => {
+      observer.next('banana');
+    }, 1000);
+
+    jest.runAllTimers();
+    expect(subscriber).toHaveBeenCalledTimes(2);
+    expect(subscriber.mock.calls).toEqual([['apple'], ['banana']]);
+  });
+
+  test('can be reduced incrementally', () => {
+    const Actions = {
+      decrement: { type: 'DECREMENT' },
+      increment: { type: 'INCREMENT' },
+    };
+    const init = { value: 0 };
+    const reducer = (state = init, action) => {
+      switch (action.type) {
+        case Actions.decrement.type:
+          return { value: state.value - 1 };
+        case Actions.increment.type:
+          return { value: state.value + 1 };
+        default:
+          return state;
+      }
+    };
+
+    const actionList = [
+      Actions.increment,
+      Actions.increment,
+      Actions.increment,
+      Actions.increment,
+      Actions.increment,
+    ];
+    const log = Observable.from(actionList);
+
+    const subscriber = jest.fn();
+
+    log.subscribe(subscriber);
+
+    expect(subscriber).toHaveBeenCalledTimes(5);
+    expect(subscriber).toHaveBeenCalledWith({ type: 'INCREMENT' });
+
+    let state = init;
+    const stateLog = log.map(next => {
+      state = reducer(state, next);
+      return state;
+    });
+
+    const stateSubscriber = jest.fn();
+    stateLog.subscribe(stateSubscriber);
+    expect(stateSubscriber).toHaveBeenCalledTimes(5);
+    expect(stateSubscriber.mock.calls).toEqual([
+      [{ value: 1 }],
+      [{ value: 2 }],
+      [{ value: 3 }],
+      [{ value: 4 }],
+      [{ value: 5 }],
+    ]);
+  });
 });
